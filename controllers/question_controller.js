@@ -1,5 +1,6 @@
 const Question = require('../models/question');
 const Option = require('../models/option');
+const env = require('../config/environment');
 
 module.exports.fetchAllQuestions = async function(req, res){
     try{
@@ -56,7 +57,7 @@ module.exports.addOption = async function(req, res){
             votes: 0,
             link_to_vote: "#"
         })
-        let link_to_vote =  `http://localhost:8000/options/${option.id}/add_vote`;
+        let link_to_vote =  `http://${env.host}:8000/options/${option.id}/add_vote`;
 
         //updating link_to_vote
         await Option.findByIdAndUpdate(option.id, {link_to_vote: link_to_vote})
